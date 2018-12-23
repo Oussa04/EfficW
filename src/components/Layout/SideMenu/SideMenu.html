@@ -1,0 +1,94 @@
+<aside class="app-sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <img :src="images.logo" class="logocenter" />
+    <button type="button" class="sidebar-toggle">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+  <div class="sidebar-menu">
+    <ul class="sidebar-nav">
+      <li class="dashboard">
+        <router-link to="/dashboard">
+          <div class="icon">
+            <i class="mdi mdi-chart-bar mdi-36px" aria-hidden="true"></i>
+          </div>
+          <div class="title">Dashboard</div>
+        </router-link>
+      </li>
+  
+      <li class="stores">
+        <router-link to="/stores">
+          <div class="icon">
+            <i class="mdi mdi-store mdi-36px" aria-hidden="true"></i>
+          </div>
+          <div class="title">Stores</div>
+        </router-link>
+      </li>
+      <li class="categories">
+        <router-link to="/categories">
+          <div class="icon">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+          </div>
+          <div class="title">Categories</div>
+        </router-link>
+      </li>
+      <li class="categories">
+          <router-link to="/storetype">
+            <div class="icon">
+              <i class="mdi mdi-format-list-bulleted mdi-36px" aria-hidden="true"></i>
+            </div>
+            <div class="title">Store Type</div>
+          </router-link>
+        </li>
+      <li class="admins">
+
+        <router-link to="/admins">
+
+          <div class="icon">
+            <i class="fa fa-users" aria-hidden="true"></i>
+          </div>
+          <div class="title">Admins</div>
+        </router-link>
+      </li>
+      <li class="licences">
+        <router-link to="/licences">
+          <div class="icon">
+            <i class="fa fa-key" aria-hidden="true"></i>
+          </div>
+          <div class="title">Licences</div>
+        </router-link>
+      </li>
+      <li class="stacktrace">
+          <router-link to="/stacktrace">
+            <div class="icon">
+              <i class="fa fa-bug" aria-hidden="true"></i>
+            </div>
+            <div class="title">StackTrace</div>
+          </router-link>
+        </li>
+            <!-- <li><a href="@@path/pages/404.html">404</a></li> -->
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="sidebar-footer">
+    <ul class="menu">
+      
+      <li>
+        <a href="#">
+          <span class="flag-icon flag-icon-th flag-icon-squared"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>
+<!--
+<script type="text/ng-template" id="sidebar-dropdown.tpl.html">
+  <div class="dropdown-background">
+    <div class="bg"></div>
+  </div>
+  <div class="dropdown-container">
+    {{list}}
+  </div>
+</script>-->

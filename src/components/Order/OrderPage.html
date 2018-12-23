@@ -1,0 +1,371 @@
+<div>
+    <div class="overlay" v-show="loading">
+        <pulse-loader class="overlay-content"></pulse-loader>
+    </div>
+    <notifications group="order" position="bottom center" />
+    <div id="page">
+        <nav class="gtco-nav" role="navigation">
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-md-12 text-right gtco-contact">
+                        <ul class="">
+                            <li>
+                                <a href="#">
+                                    <i class="ti-mobile"></i> +(216) 52004004 </a>
+                            </li>
+                            <li>
+                                <a href="http://twitter.com/gettemplatesco">
+                                    <i class="ti-twitter-alt"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-mail2"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-facebook"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <div id="gtco-logo">
+                            <h1 style="color: white">
+                                <b>Efficaisse</b>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="col-xs-8 text-right menu-1">
+                        <ul>
+                            <li>
+                                <a href="index">Accueil</a>
+                            </li>
+                            <li>
+                                <a href="features">Fonctionnalités</a>
+                            </li>
+                            <li>
+                                <a href="contact">Contact</a>
+                            </li>
+                            <li class="active">
+                                <a href="order">Tarifs</a>
+                            </li>
+                            <li>
+                                <a href="about">A propos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <header id="gtco-header" class="gtco-cover gtco-cover-xs" role="banner" :style="{ backgroundImage: 'url(' + imagebg + ')' }">
+            <div class="overlay"></div>
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <div class="display-t">
+                            <div class="display-tc">
+                                <h1 class="animate-box" data-animate-effect="fadeInUp">Tarifs</h1>
+                                <h2 class="animate-box" data-animate-effect="fadeInUp">Faites votre choix et commencez dès aujourd'hui
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="gtco-section border-bottom">
+            <div class="gtco-container ">
+                <div class="row animate-box">
+                    <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+                        <h2>Plus de services</h2>
+                    </div>
+                </div>
+                <div class="row animate-box">
+                    <div class="col-md-6">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <h4 class="text-center">
+                                    EFFICAISSE
+                                </h4>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p class="lead">
+                                    <strong>50 DT</strong>
+                                </p>
+                            </div>
+                            <ul class="list-group list-group-flush text-center">
+                                <li class="list-group-item">
+                                    <i class="icon-ok text-danger"></i>Licence d'un mois renouvlable</li>
+                                <li class="list-group-item">
+                                    <i class="icon-ok text-danger"></i>Assistance première d'utilisation</li>
+                                <li class="list-group-item">
+                                    <i class="icon-ok text-danger"></i>Assistance clientèle gratuite</li>
+                                <li class="list-group-item">
+                                    <i class="icon-ok text-danger"></i>Aucun matériels fournis</li>
+                            </ul>
+                            <div class="panel-footer">
+                                <a class="btn btn-lg btn-block btn-danger" href="#cmd" v-on:click="onBuy('efficaisse')">Achetez Maintenant!</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4 class="text-center">
+                                    EFFICAISSE + 
+                                </h4>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p class="lead">
+                                    <strong>2000 DT</strong>
+                                </p>
+                            </div>
+                            <ul class="list-group list-group-flush text-center">
+                                <li class="list-group-item">
+                                    <i class="icon-ok text-danger"></i>Licence d'un mois renouvlable</li>
+                                <li class="list-group-item">
+                                    <i class="icon-ok text-danger"></i>Assistance première d'utilisation</li>
+                                <li class="list-group-item">
+                                    <i class="icon-ok text-danger"></i>Assistance clientèle gratuite</li>      
+                                <li class="list-group-item">
+                                    <i class="icon-ok text-danger"></i>Matériels fournies: Tablette Android avec support,
+                                Tiroir-caisse, Douchette, Imprimente</li>
+                            </ul>
+                            <div class="panel-footer">
+                                <a class="btn btn-lg btn-block btn-info" href="#cmd" v-on:click="onBuy('efficaisse+')">Achetez Maintenant!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="cmd" class="gtco-section">
+            <div class="gtco-container">
+                <div class="row row-pb-md">
+                    <div class="col-md-6 animate-box">
+                        <h3>Commandez votre licence</h3>
+                        <form>
+                            <div :class="{'row form-group': true, 'has-error': errors.has('name') }">
+                                <div class="col-md-12">
+                                    <input type="text" name="name" v-model="form.name" v-validate="'required'" class="form-control" placeholder="Nom">
+                                </div>
+
+                            </div>
+                            <div v-show="errors.has('name')" class="col-md-12 margin-form">
+                                <span class="list-group-item list-group-item-danger">
+                                    {{ errors.first('name') }}
+                                </span>
+                            </div>
+                            <div :class="{'row form-group': true, 'has-error': errors.has('email') }">
+                                <div class="col-md-12">
+                                    <input type="text" name="email" class="form-control" v-model="form.email" v-validate="'required|email'" placeholder="Votre Email">
+                                </div>
+                            </div>
+                            <div v-show="errors.has('email')" class="col-md-12 margin-form">
+                                <span class="list-group-item list-group-item-danger">
+                                    {{ errors.first('email') }}
+                                </span>
+                            </div>
+                            <div :class="{'row form-group': true, 'has-error': errors.has('phone') }">
+                                <div class="col-md-12">
+                                    <input type="text" name="phone" class="form-control" v-model="form.phone" v-validate="'required|digits:8'" placeholder="Numéro de téléphone">
+                                </div>
+                            </div>
+                            <div v-show="errors.has('phone')" class="col-md-12 margin-form">
+                                <span class="list-group-item list-group-item-danger">
+                                    {{ errors.first('phone') }}
+                                </span>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-md-12 margin-form">
+                                    <span :class="{'select stretch': true, 'is-danger': errors.has('pack') }">
+                                        <select class="stretch" ref="select" v-validate="'not_in:-'" v-model="form.pack" name="pack">
+                                            <option selected="selected" disabled="disabled" value="-" hidden="hidden">
+                                                Selectionner le type de Pack
+                                            </option>
+                                            <option value="efficaisse">
+                                                Efficaisse
+                                            </option>
+                                            <option value="efficaisse+">
+                                                Efficaisse +
+                                            </option>
+                                        </select>
+                                    </span>
+                                </div>
+                                <div v-show="errors.has('pack')" class="col-md-12 margin-form">
+                                    <span class="list-group-item list-group-item-danger">
+                                        {{ errors.first('pack') }}
+                                    </span>
+                                </div>
+                            </div>
+
+
+                            <div class=" margin-form">
+                                <vue-recaptcha sitekey="6LeqK0QUAAAAAKvimc711-H53Oeyt0OcUwJbtP8R" @verify="onVerify" @expired="onExpired" ref="recaptcha"></vue-recaptcha>
+                            </div>
+                            <div v-show="!checked" class="col-md-12 margin-form">
+                                <span class="list-group-item list-group-item-danger">
+                                    Recaptcha incorrecte
+                                </span>
+                            </div>
+                            <hr>
+
+
+                        </form>
+                        <div class="margin-form">
+                            <input type="button" value="Envoyer" class="btn btn-primary " v-on:click="onSubmit()">
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-md-push-1 animate-box">
+
+                        <div class="gtco-contact-info">
+                            <h3>Informations de contact</h3>
+                            <ul>
+                                <li class="address">Z.I. Chotrana II B.P. 160 Pôle Technologique El Ghazela - Ariana 2083
+                                    <br> Ouvrir dans
+                                    <a href="https://www.google.tn/maps/place/Esprit+Pr%C3%A9pa/@36.8984864,10.1875732,17z/data=!3m1!4b1!4m5!3m4!1s0x12e2cb7454c6ed51:0xcb5e71cbf91ec526!8m2!3d36.8984821!4d10.1897619?hl=fr&shorturl=1">
+                                        google map
+                                    </a>
+                                </li>
+                                <li class="phone">
+                                    <a href="tel://1234567920">+(216) 52004004</a>
+                                </li>
+                                <li class="email">
+                                    <a href="mailto:info@yoursite.com">efficaisse@meteor.co</a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gtco-subscribe">
+        <div class="gtco-container">
+            <div class="row animate-box">
+                <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+                    <h2>INSCRIVEZ VOUS</h2>
+                    <p>Restez informer par toutes nos nouveautés.</p>
+                </div>
+            </div>
+            <div class="row animate-box">
+                <div class="col-md-12">
+                    <form class="form-inline">
+                        <div class="col-md-4 col-sm-4">
+                            <div class="form-group">
+                                <label for="email" class="sr-only">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="form-group">
+                                <label for="name" class="sr-only">Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Nom et Prénom">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <button type="submit" class="btn btn-default btn-block">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="gtco-footer" role="contentinfo">
+        <div class="gtco-container">
+            <div class="row row-p	b-md">
+
+                <div class="col-md-4">
+                    <div class="gtco-widget">
+                        <h3>About Us</h3>
+                        <p>Meteor est une start-up innovante spécialisée dans le développement des solutions pour les commerces</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-md-push-1">
+                    <div class="gtco-widget">
+                        <h3>Links</h3>
+                        <ul class="gtco-footer-links">
+                            <li>
+                                <a href="contact">Contact</a>
+                            </li>
+                            <li>
+                                <a href="order">Acheter une licence</a>
+                            </li>
+                            <li>
+                                <a href="">Presse</a>
+                            </li>
+                            <li>
+                                <a href="about">A propos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="gtco-widget">
+                        <h3>Contact</h3>
+                        <ul class="gtco-quick-contact">
+                            <li>
+                                <a>
+                                    <i class="icon-phone"></i> +(216) 52004004 </a>
+                            </li>
+                            <li>
+                                <a href="contact">
+                                    <i class="icon-mail2"></i> efficaisse@meteor.co</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row copyright">
+                <div class="col-md-12">
+                    <p class="pull-left">
+                        <small class="block">&copy; 2018 Meteor. Tous droits réservés.</small>
+                    </p>
+                    <p class="pull-right">
+                        <ul class="gtco-social-icons pull-right">
+                            <li>
+                                <a href="#">
+                                    <i class="icon-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-linkedin"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop">
+            <i class="icon-arrow-up"></i>
+        </a>
+    </div>
+</div>

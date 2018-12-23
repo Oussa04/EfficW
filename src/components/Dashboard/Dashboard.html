@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-xs-12">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <today-sale-chart></today-sale-chart>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <card :no-header="true" addition-class-name="card-banner card-green-light">
+          <i class="icon fa fa-suitcase fa-4x"></i>
+          <div class="content">
+            <div class="title">Licence requested today</div>
+            <div class="value"><span class="sign"></span>{{count.package}}</div>
+          </div>
+        </card>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <card :no-header="true" addition-class-name="card-banner card-blue-light">
+          <i class="icon fa fa-thumbs-down fa-4x"></i>
+          <div class="content">
+            <div class="title">Licence ended today</div>
+            <div class="value"><span class="sign"></span>{{count.LicenceEnded}}</div>
+          </div>
+        </card>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <card :no-header="true" addition-class-name="card-banner card-yellow-light">
+          <i class="icon fa fa-bug fa-4x"></i>
+          <div class="content">
+            <div class="title">Application bugs for today</div>
+            <div class="value"><span class="sign"></span>{{count.bug}}</div>
+          </div>
+        </card>
+      </div>
+
+    </div>
+
+    <div class="row">
+      
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <circle-chart></circle-chart>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

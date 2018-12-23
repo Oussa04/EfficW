@@ -1,0 +1,16 @@
+.imageList{
+    height:50px;
+    width: auto;
+}
+.tag{
+    margin-left: 10px;
+}
+.autocomplete > .dropdown-menu{
+    display: block;
+} 
+.autocomplete > .dropdown-menu > .dropdown-content > a{
+    display: block;
+} 
+.autocomplete > .dropdown-menu > .dropdown-content > a > span {
+    margin-left: 10px;
+} 

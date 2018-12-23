@@ -1,0 +1,397 @@
+<div class="row">
+    <div class="overlay" v-show="loading">
+        <pulse-loader class="overlay-content"></pulse-loader>
+    </div>
+    <notifications group="store" position="bottom center" />
+  <v-dialog/>
+    <section></section>
+
+    
+    <b-tabs v-model="activeTab">
+        <b-tab-item label="Licence Store">
+            <div class="col-xs-12">
+
+
+                <div class="card">
+                    <div class="card-header">
+                        Liste des Stores
+                    </div>
+                    <div class="card-body no-padding ">
+
+                        <b-table :data="licence.tableDataSimple" :paginated="true" :selected.sync="licence.selected" focusable>
+                            <template slot-scope="props" slot="header">
+                                <b-tooltip :active="!!props.column.meta" :label="props.column.meta" dashed>
+                                    {{ props.column.label }}
+                                </b-tooltip>
+                            </template>
+                            <template slot-scope="props">
+                                <b-table-column label="Registre de commerce" field="registerDC" sortable>
+                                    {{ props.row.registerDC }}
+                                </b-table-column>
+
+                                <b-table-column field="name" label="Nom" sortable>
+                                    {{ props.row.name }}
+                                </b-table-column>
+
+                                <b-table-column field="phone" label="Télephone" sortable>
+                                    {{ props.row.phone }}
+                                </b-table-column>
+                                <b-table-column field="licence" label="Licence" sortable>
+                                    {{ props.row.licence.name }}
+                                </b-table-column>
+                                <b-table-column field="expiration" label="Date d'expiration" sortable>
+                                    <span :class="(new Date() < expirationDate(props.row.payDate,props.row.licence.length))  ? 'is-success' : 'is-danger'" class="tag ">
+                                        {{ expirationDate(props.row.payDate,props.row.licence.length).toLocaleDateString() }}
+                                    </span>
+                                </b-table-column>
+                            </template>
+
+                        </b-table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Ajouter une Licence à un store
+                    </div>
+                    <div class="card-body">
+                        <form class="form form-horizontal" data-vv-scope="contact">
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Registre de commerce</label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <input v-model="licence.selected.registerDC" name="name" type="text" class="form-control" placeholder="" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Nom du store</label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <input v-model="licence.selected.name" name="name" type="text" class="form-control" placeholder="" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Licence</label>
+                                <div class="col-md-4">
+                                    <span class="select">
+                                        <select ref="select" v-validate="'not_in:-'" v-model="licence.selectedLicence" name="selectedLicence">
+                                            <option selected="selected" disabled="disabled" value="-" hidden="hidden">
+                                                Selectionnez une Licence
+                                            </option>
+                                            <option v-for="licence in licence.licences" :value="licence.name">
+                                                {{ licence.name }} - {{licence.length}} Mois
+                                            </option>
+                                        </select>
+
+                                    </span>
+                                </div>
+                                <div class="col-md-9 col-md-offset-3 ">
+                                    <span v-show="errors.has('licence.selectedLicence')" class="list-group-item list-group-item-danger">
+                                        {{ errors.first('licence.selectedLicence') }}
+                                    </span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-footer">
+                                <div class="form-group">
+                                    <div class="col-md-9 col-md-offset-3">
+                                        <button type="button" class="btn btn-primary" v-on:click="assignLicence()" :disabled="licence.selected.registerDC == null">Enregister</button>
+                                        <button type="button" class="btn btn-default" v-on:click="resetlicence()">Annuler</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </b-tab-item>
+
+        <b-tab-item label="Ajouter un client">
+            <div class="col-xs-12">
+
+
+                <div class="card">
+                    <div class="card-header">
+                        Liste des Requêtes
+                    </div>
+                    <div class="card-body ">
+                            <button class="button field is-danger" @click="clearpackageList()"
+                            :disabled="package.selected == null">
+                            <b-icon icon="close"></b-icon>
+                            <span>Vider la selection</span>
+                        </button>
+                        <b-table :data="package.tableDataSimple" :paginated="true" :selected.sync="package.selected" focusable @select="selectReq">
+                            <template slot-scope="props" slot="header">
+                                <b-tooltip :active="!!props.column.meta" :label="props.column.meta" dashed>
+                                    {{ props.column.label }}
+                                </b-tooltip>
+                            </template>
+                            <template slot-scope="props">
+                                <b-table-column label="Id" field="id" sortable>
+                                    {{ props.row.id }}
+                                </b-table-column>
+                                <b-table-column label="Email" field="email" sortable>
+                                    {{ props.row.email }}
+                                </b-table-column>
+                                <b-table-column field="name" label="Nom" sortable>
+                                    {{ props.row.name }}
+                                </b-table-column>
+
+                                <b-table-column field="phone" label="Télephone" sortable>
+                                    {{ props.row.phone }}
+                                </b-table-column>
+                                <b-table-column field="pack" label="Type de pack" sortable>
+                                    <span :class="(props.row.pack == 'efficaisse+')  ? 'is-success' : 'is-danger'" class="tag ">
+                                        {{ (props.row.pack == 'efficaisse+') ? 'Efficaisse +' : 'Efficaisse' }}
+                                    </span>
+                                </b-table-column>
+                                <b-table-column field="date" label="Date du requête" sortable>
+                                    <span class="tag ">
+                                        {{ new Date(props.row.date).toLocaleDateString() }}
+                                    </span>
+                                </b-table-column>
+                            </template>
+
+                        </b-table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Ajouter un client
+                    </div>
+                    <div class="card-body">
+                        <form class="form form-horizontal" data-vv-scope="package">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Nom d'utilisateur</label>
+                                <div class="col-md-4">
+                                    <div :class="{'input-group': true, 'has-error': errors.has('username') }">
+                                        <input v-model="package.user.username" v-validate="'required|alpha_dash'" name="username" type="text" class="form-control"
+                                            placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3 ">
+                                <span v-show="errors.has('package.username')" class="list-group-item list-group-item-danger">
+                                    {{ errors.first('package.username') }}
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Email</label>
+                                <div class="col-md-4">
+                                    <div :class="{'input-group': true, 'has-error': errors.has('package.email') }">
+                                        <input v-model="package.user.email" v-validate="'required|email'" name="email" type="text" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3 ">
+                                <span v-show="errors.has('package.email')" class="list-group-item list-group-item-danger">
+                                    {{ errors.first('package.email') }}
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Nom</label>
+                                <div class="col-md-4">
+                                    <div :class="{'input-group': true, 'has-error': errors.has('package.uname') }">
+                                        <input v-model="package.user.name" v-validate="'required'" name="uname" type="text" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3 ">
+                                <span v-show="errors.has('package.uname')" class="list-group-item list-group-item-danger">
+                                    {{ errors.first('package.uname') }}
+                                </span>
+                            </div>
+                            <div class="form-group ">
+                                <label class=" col-md-3 control-label">Mot de passe</label>
+                                <div class="col-md-4 ">
+                                    <div :class="{'input-group': true, 'has-error': errors.has('package.password') }">
+                                        <input v-model="package.user.password" v-validate="'required|min:8'" name="password" type="password" class="form-control"
+                                            placeholder="">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3 ">
+                                <span v-show="errors.has('package.password')" class="list-group-item list-group-item-danger">
+                                    {{ errors.first('package.password') }}
+                                </span>
+                            </div>
+                            <div class="form-group ">
+                                <label class=" col-md-3 control-label">Répeter le mot de passe</label>
+                                <div class="col-md-4 ">
+                                    <div :class="{'input-group': true, 'has-error': errors.has('package.repeat') }">
+                                        <input v-model="package.user.repeat" v-validate="'confirmed:password'" name="repeat" type="password" class="form-control"
+                                            placeholder="">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3 ">
+                                <span v-show="errors.has('package.repeat')" class="list-group-item list-group-item-danger">
+                                    {{ errors.first('package.repeat') }}
+                                </span>
+                            </div>
+                            <section>
+
+                                <b-collapse class="panel">
+                                    <div slot="trigger" slot-scope="storeprops" class="panel-heading">
+                                        <p class="card-header-title">
+                                            Store
+                                        </p>
+
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="content">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Registre de commerce</label>
+                                                <div class="col-md-4">
+                                                    <div :class="{'input-group': true, 'has-error': errors.has('package.Rdc') }">
+                                                        <input v-model="package.user.store.registerDC" v-validate="'required'" name="Rdc" type="text" class="form-control" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 col-md-offset-3 ">
+                                                <span v-show="errors.has('package.Rdc')" class="list-group-item list-group-item-danger">
+                                                    {{ errors.first('package.Rdc') }}
+                                                </span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Nom du store</label>
+                                                <div class="col-md-4">
+                                                    <div :class="{'input-group': true, 'has-error': errors.has('package.sname') }">
+                                                        <input v-model="package.user.store.name" v-validate="'required'" name="sname" type="text" class="form-control" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 col-md-offset-3 ">
+                                                <span v-show="errors.has('package.sname')" class="list-group-item list-group-item-danger">
+                                                    {{ errors.first('package.sname') }}
+                                                </span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Adresse</label>
+                                                <div class="col-md-4">
+                                                    <div :class="{'input-group': true, 'has-error': errors.has('package.adress') }">
+                                                        <input v-model="package.user.store.adress" v-validate="'required'" name="adress" type="text" class="form-control" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 col-md-offset-3 ">
+                                                <span v-show="errors.has('package.adress')" class="list-group-item list-group-item-danger">
+                                                    {{ errors.first('package.adress') }}
+                                                </span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Télephone</label>
+                                                <div class="col-md-4">
+                                                    <div class="input-group">
+                                                        <input v-model="package.user.store.phone" name="phone" type="text" class="form-control" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Licence</label>
+                                                <div class="col-md-4">
+                                                    <span class="select">
+                                                        <select ref="select" v-validate="'not_in:-'" v-model="package.user.store.licence.name" name="selectedLicence">
+                                                            <option selected="selected" disabled="disabled" value="-" hidden="hidden">
+                                                                Selectionnez une Licence
+                                                            </option>
+                                                            <option v-for="licence in package.licences" :value="licence.name">
+                                                                {{ licence.name }} - {{licence.length}} Mois
+                                                            </option>
+                                                        </select>
+
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-9 col-md-offset-3 ">
+                                                    <span v-show="errors.has('package.selectedLicence')" class="list-group-item list-group-item-danger">
+                                                        {{ errors.first('package.selectedLicence') }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Type</label>
+                                                <div class="col-md-4">
+                                                    <span class="select">
+                                                        <select ref="select" v-validate="'not_in:-'" v-model="package.user.store.type.name" name="selctedType">
+                                                            <option selected="selected" disabled="disabled" value="-" hidden="hidden">
+                                                                Selectionnez un Type
+                                                            </option>
+                                                            <option v-for="type in types" :value="type.name">
+                                                                {{ type.name }}
+                                                            </option>
+                                                        </select>
+
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-9 col-md-offset-3 ">
+                                                    <span v-show="errors.has('package.selctedType')" class="list-group-item list-group-item-danger">
+                                                        {{ errors.first('package.selctedType') }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Type de Pack</label>
+                                                <div class="col-md-4">
+                                                    <span class="select">
+                                                        <select ref="select" v-validate="'not_in:-'" v-model="package.user.store.pack" name="selectedPack">
+                                                            <option selected="selected" disabled="disabled" value="-" hidden="hidden">
+                                                                Selectionnez une Pack
+                                                            </option>
+                                                            <option selected="selected" value="efficaisse">
+                                                                Efficaisse
+                                                            </option>
+                                                            <option selected="selected" value="efficaisse+">
+                                                                Efficaisse +
+                                                            </option>
+                                                        </select>
+
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-9 col-md-offset-3 ">
+                                                    <span v-show="errors.has('package.selectedPack')" class="list-group-item list-group-item-danger">
+                                                        {{ errors.first('package.selectedPack') }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </b-collapse>
+
+                            </section>
+
+
+
+                            <div class="form-footer">
+                                <div class="form-group">
+                                    <div class="col-md-9 col-md-offset-3">
+                                        <button type="button" class="btn btn-primary" v-on:click="addClient()" >Enregister</button>
+                                        <button type="button" class="btn btn-default" v-on:click="resetRequest()">Annuler</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </b-tab-item>
+
+    </b-tabs>
+    </section>
+
+</div>

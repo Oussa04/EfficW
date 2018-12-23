@@ -1,0 +1,217 @@
+<div>
+
+            <notifications group="contact" position="bottom center" />
+          <v-dialog/>
+            <section></section>
+
+    <div class="gtco-loader"></div>
+
+    <div id="page">
+            <nav class="gtco-nav" role="navigation">
+                    <div class="gtco-container">
+                        <div class="row">
+                            <div class="col-md-12 text-right gtco-contact">
+                                <ul class="">
+                                    <li><a href="#"><i class="ti-mobile"></i> +(216) 52004004 </a></li>
+                                    <li><a href="http://twitter.com/gettemplatesco"><i class="ti-twitter-alt"></i> </a></li>
+                                    <li><a href="#"><i class="icon-mail2"></i></a></li>
+                                    <li><a href="#"><i class="ti-facebook"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div id="gtco-logo"><h1 style="color: white"><b>Efficaisse</b></h1></div>
+                            </div>
+                            <div class="col-xs-8 text-right menu-1">
+                                <ul>
+                                    <li ><a href="index">Accueil</a></li>
+                                    <li><a href="features">Fonctionnalités</a></li>
+                                    <li class="active"><a href="contact">Contact</a></li>
+                                    <li><a href="order">Tarifs</a></li>
+                                    <li><a href="about">A propos</a></li>
+                                </ul>
+                            </div>
+                        </div>		
+                    </div>
+                </nav>
+
+        <header id="gtco-header" class="gtco-cover gtco-cover-xs" role="banner" :style="{ backgroundImage: 'url(' + imagebg + ')' }">
+            <div class="overlay"></div>
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <div class="display-t">
+                            <div class="display-tc">
+                                <h1 class="animate-box" data-animate-effect="fadeInUp">Contact</h1>
+                                <h2 class="animate-box" data-animate-effect="fadeInUp">Contactez nous pour toute demande d'informations
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="gtco-section">
+            <div class="gtco-container">
+                <div class="row row-pb-md">
+                    <div class="col-md-6 animate-box">
+                        <h3>Contactez nous</h3>
+                        <form  data-vv-scope="package" >
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <label class="sr-only" for="name">Name</label>
+                                    <input type="text" id="name" class="form-control" placeholder="Nom" v-model="form.name">
+                                </div>
+
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <label class="sr-only" for="email">Email</label>
+                                    <input v-model="form.email" type="text" id="email" class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <label class="sr-only" for="subject">Subject</label>
+                                    <input v-model="form.subject" type="text" id="subject" class="form-control" placeholder="Sujet">
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <label class="sr-only" for="message">Message</label>
+                                    <textarea v-model="form.message" name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Ecrivez votre message ici"></textarea>
+                                </div>
+                            </div>
+                            <div class="margin-form ">
+                                <vue-recaptcha sitekey="6LeqK0QUAAAAAKvimc711-H53Oeyt0OcUwJbtP8R" @verify="onVerify" @expired="onExpired" ref="recaptcha"></vue-recaptcha>
+                            </div>
+                            <div class="form-group"><br><hr>
+                                <input type="submit" value="Send Message" v-on:click="contact()"  class="btn btn-primary">
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="col-md-5 col-md-push-1 animate-box">
+
+                            <div class="gtco-contact-info">
+                                    <h3>Informations de contact</h3>
+                                    <ul>
+                                        <li class="address">Z.I. Chotrana II B.P. 160
+                                                Pôle Technologique El Ghazela - Ariana 2083 <br>
+                                                Ouvrir dans 
+                                                <a href="https://www.google.tn/maps/place/Esprit+Pr%C3%A9pa/@36.8984864,10.1875732,17z/data=!3m1!4b1!4m5!3m4!1s0x12e2cb7454c6ed51:0xcb5e71cbf91ec526!8m2!3d36.8984821!4d10.1897619?hl=fr&shorturl=1">
+                                                google map
+                                                </a></li>
+                                        <li class="phone">
+                                            <a href="tel://1234567920">+(216) 52004004</a>
+                                        </li>
+                                        <li class="email">
+                                            <a href="mailto:info@yoursite.com">efficaisse@meteor.co</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+	<div id="gtco-subscribe">
+            <div class="gtco-container">
+                <div class="row animate-box">
+                    <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+                        <h2>INSCRIVEZ VOUS</h2>
+                        <p>Restez informer par toutes nos nouveautés.</p>
+                    </div>
+                </div>
+                <div class="row animate-box">
+                    <div class="col-md-12">
+                        <form class="form-inline">
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group">
+                                    <label for="email" class="sr-only">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group">
+                                    <label for="name" class="sr-only">Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Nom et Prénom">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <button type="submit" class="btn btn-default btn-block">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+	<footer id="gtco-footer" role="contentinfo">
+            <div class="gtco-container">
+                <div class="row row-p	b-md">
+    
+                    <div class="col-md-4">
+                        <div class="gtco-widget">
+                            <h3>About Us</h3>
+                            <p>Meteor est une start-up innovante spécialisée dans le développement des solutions pour les commerces</p>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-4 col-md-push-1">
+                        <div class="gtco-widget">
+                            <h3>Links</h3>
+                            <ul class="gtco-footer-links">
+                                <li><a href="contact">Contact</a></li>
+                                <li><a href="order">Acheter une licence</a></li>
+                                <li><a href="">Presse</a></li>
+                                <li><a href="about">A propos</a></li>
+                            </ul>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-4">
+                        <div class="gtco-widget">
+                            <h3>Contact</h3>
+                            <ul class="gtco-quick-contact">
+                                <li><a><i class="icon-phone"></i> +(216) 52004004 </a></li>
+                                <li><a href="contact"><i class="icon-mail2"></i> efficaisse@meteor.co</a></li>
+                            </ul>
+                        </div>
+                    </div>
+    
+                </div>
+    
+                <div class="row copyright">
+                    <div class="col-md-12">
+                        <p class="pull-left">
+                            <small class="block">&copy; 2018 Meteor. Tous droits réservés.</small> 
+                        </p>
+                        <p class="pull-right">
+                            <ul class="gtco-social-icons pull-right">
+                                <li><a href="#"><i class="icon-twitter"></i></a></li>
+                                <li><a href="#"><i class="icon-facebook"></i></a></li>
+                                <li><a href="#"><i class="icon-linkedin"></i></a></li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+    
+            </div>
+        </footer>
+
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop">
+            <i class="icon-arrow-up"></i>
+        </a>
+    </div>
+</div>

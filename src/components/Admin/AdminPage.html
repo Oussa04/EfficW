@@ -1,0 +1,137 @@
+<div class="row">
+  <div class="overlay" v-show="loading">
+    <pulse-loader class="overlay-content"></pulse-loader>
+  </div>
+  <notifications group="admin" position="bottom center" />
+  <v-dialog/>
+  <div class="col-xs-12">
+
+
+    <div class="card">
+      <div class="card-header">
+        Liste des Admins
+      </div>
+      <div class="card-body no-padding ">
+
+        <b-table :data="tableDataSimple" :paginated="true">
+          <template slot-scope="props" slot="header">
+            <b-tooltip :active="!!props.column.meta" :label="props.column.meta" dashed>
+              {{ props.column.label }}
+            </b-tooltip>
+          </template>
+          <template slot-scope="props">
+            <b-table-column label="Nom d'utilisateur" field="username" sortable>
+              {{ props.row.username }}
+            </b-table-column>
+
+            <b-table-column field="name" label="Nom" sortable>
+              {{ props.row.name }}
+            </b-table-column>
+
+            <b-table-column field="email" label="Email" sortable>
+              {{ props.row.email }}
+            </b-table-column>
+            <b-table-column label="Activé" field="enabled" sortable>
+              <b-icon pack="fa" :icon="props.row.enabled  ? 'check' : 'times'">
+              </b-icon>
+            </b-table-column>
+          </template>
+
+        </b-table>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Ajouter un compte Admin
+      </div>
+      <div class="card-body">
+        <form class="form form-horizontal">
+
+
+
+          <div class="form-group">
+            <label class="col-md-3 control-label">Nom d'utilisateur</label>
+            <div class="col-md-4">
+              <div :class="{'input-group': true, 'has-error': errors.has('username') }">
+                <input v-model="username" v-validate="'required|alpha_dash'" name="username" type="text" class="form-control" placeholder="">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9 col-md-offset-3 ">
+            <span v-show="errors.has('username')" class="list-group-item list-group-item-danger">
+              {{ errors.first('username') }}
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Email</label>
+            <div class="col-md-4">
+              <div :class="{'input-group': true, 'has-error': errors.has('email') }">
+                <input v-model="email" v-validate="'required|email'" name="email" type="text" class="form-control" placeholder="">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9 col-md-offset-3 ">
+            <span v-show="errors.has('email')" class="list-group-item list-group-item-danger">
+              {{ errors.first('email') }}
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Nom</label>
+            <div class="col-md-4">
+              <div :class="{'input-group': true, 'has-error': errors.has('name') }">
+                <input v-model="name" v-validate="'required'" name="name" type="text" class="form-control" placeholder="">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9 col-md-offset-3 ">
+            <span v-show="errors.has('name')" class="list-group-item list-group-item-danger">
+              {{ errors.first('name') }}
+            </span>
+          </div>
+          <div class="form-group ">
+            <label class=" col-md-3 control-label">Mot de passe</label>
+            <div class="col-md-4 ">
+              <div :class="{'input-group': true, 'has-error': errors.has('password') }">
+                <input v-model="password" v-validate="'required|min:8'" name="password" type="password" class="form-control" placeholder="">
+
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-9 col-md-offset-3 ">
+            <span v-show="errors.has('password')" class="list-group-item list-group-item-danger">
+              {{ errors.first('password') }}
+            </span>
+          </div>
+          <div class="form-group ">
+            <label class=" col-md-3 control-label">Répeter le mot de passe</label>
+            <div class="col-md-4 ">
+              <div :class="{'input-group': true, 'has-error': errors.has('repeat') }">
+                <input v-model="repeat" v-validate="'confirmed:password'" name="repeat" type="password" class="form-control" placeholder="">
+
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-9 col-md-offset-3 ">
+            <span v-show="errors.has('repeat')" class="list-group-item list-group-item-danger">
+              {{ errors.first('repeat') }}
+            </span>
+          </div>
+
+          <div class="form-footer">
+            <div class="form-group">
+              <div class="col-md-9 col-md-offset-3">
+                <button type="button" class="btn btn-primary" v-on:click="addAdmin()">Enregister</button>
+                <button type="button" class="btn btn-default" v-on:click="reset()">Annuler</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

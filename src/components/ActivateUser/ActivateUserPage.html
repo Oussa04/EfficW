@@ -1,0 +1,171 @@
+<div>
+    <div class="overlay" v-show="loading">
+        <pulse-loader class="overlay-content"></pulse-loader>
+    </div>
+    <div id="page">
+        <nav class="gtco-nav" role="navigation">
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-md-12 text-right gtco-contact">
+                        <ul class="">
+                            <li>
+                                <a href="#">
+                                    <i class="ti-mobile"></i> +(216) 52004004 </a>
+                            </li>
+                            <li>
+                                <a href="http://twitter.com/gettemplatesco">
+                                    <i class="ti-twitter-alt"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-mail2"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-facebook"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <div id="gtco-logo">
+                            <h1 style="color: white">
+                                <b>Efficaisse</b>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="col-xs-8 text-right menu-1">
+                        <ul>
+                            <li>
+                                <a href="index">Accueil</a>
+                            </li>
+                            <li>
+                                <a href="features">Fonctionnalités</a>
+                            </li>
+                            <li>
+                                <a href="contact">Contact</a>
+                            </li>
+                            <li>
+                                <a href="order">Tarifs</a>
+                            </li>
+                            <li>
+                                <a href="about">A propos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <header id="gtco-header" class="gtco-cover" role="banner" :style="{ backgroundImage: 'url(' + imagebg + ')' }">
+            <div class="overlay"></div>
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-0 text-left">
+                        <div class="display-t">
+                            <div class="display-tc">
+                                <h1 class="animate-box" data-animate-effect="fadeInUp">
+                                    <img src="~src/assets/Efficaisse.png">
+                                </h1>
+                                <h1 class="animate-box" data-animate-effect="fadeInUp" v-show="response">
+                                    <i :class="success ? 'ti ti-check' : 'ti ti-close'"></i> {{response}}</h1>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+        <footer id="gtco-footer" role="contentinfo">
+            <div class="gtco-container">
+                <div class="row row-p	b-md">
+
+                    <div class="col-md-4">
+                        <div class="gtco-widget">
+                            <h3>About Us</h3>
+                            <p>Meteor est une start-up innovante spécialisée dans le développement des solutions pour les commerces</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-md-push-1">
+                        <div class="gtco-widget">
+                            <h3>Links</h3>
+                            <ul class="gtco-footer-links">
+                                <li>
+                                    <a href="contact">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="order">Acheter une licence</a>
+                                </li>
+                                <li>
+                                    <a href="">Presse</a>
+                                </li>
+                                <li>
+                                    <a href="about">A propos</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="gtco-widget">
+                            <h3>Contact</h3>
+                            <ul class="gtco-quick-contact">
+                                <li>
+                                    <a>
+                                        <i class="icon-phone"></i> +(216) 52004004 </a>
+                                </li>
+                                <li>
+                                    <a href="contact">
+                                        <i class="icon-mail2"></i> efficaisse@meteor.co</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row copyright">
+                    <div class="col-md-12">
+                        <p class="pull-left">
+                            <small class="block">&copy; 2018 Meteor. Tous droits réservés.</small>
+                        </p>
+                        <p class="pull-right">
+                            <ul class="gtco-social-icons pull-right">
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-linkedin"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+
+    <div class="gototop js-top">
+        <a href="#" class="js-gotop">
+            <i class="icon-arrow-up"></i>
+        </a>
+    </div>
+</div>
